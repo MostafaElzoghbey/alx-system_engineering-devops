@@ -1,2 +1,2 @@
 #!/bin/bash
-fkjd
+chmod --reference=olleh hello
