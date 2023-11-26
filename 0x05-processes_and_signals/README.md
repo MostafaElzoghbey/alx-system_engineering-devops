@@ -1,1 +1,1 @@
-# Project - 0x05 Processes and Signals - Bash
+# Processes and signals
