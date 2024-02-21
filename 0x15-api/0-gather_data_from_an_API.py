@@ -15,7 +15,8 @@ if __name__ == "__main__":
                .format(argv[1])).json()
     name = user.get("name")
     numer_of_tasks = len(tasks)
-    numer_of_comleted_tasks = len([task for task in tasks if (task.get("completed"))])
+    numer_of_comleted_tasks = len([task for task in tasks 
+                                   if (task.get("completed"))])
     print(
         "Employee {} is done with tasks({}/{}):".format(
             name, numer_of_comleted_tasks, numer_of_tasks
