@@ -1,0 +1,28 @@
+Postmortem: E-commerce Checkout Failure
+Issue Summary
+
+Duration: 2 hours (10:00 AM PST - 12:00 PM PST)
+
+Impact: Critical - Our e-commerce checkout process experienced intermittent failures, preventing users from completing purchases. Approximately 40% of users attempting checkout were affected.
+
+Root Cause: A memory leak within our payment processing service caused the server to become unresponsive under heavy load.
+
+Timeline
+
+10:00 AM PST: Monitoring alerts indicated a spike in failed checkout attempts.
+10:15 AM PST: The engineering team investigated the e-commerce application and its connection to the payment processing service. Initial assumption was a database connection issue due to high order volume.
+10:45 AM PST: Database queries were optimized, but checkout failures persisted.
+11:00 AM PST: The investigation escalated to the payment processing service provider. They confirmed their platform was operational, but experiencing higher than usual request latency.
+11:30 AM PST: Further investigation revealed abnormal memory usage on the payment processing server, suggesting a potential memory leak.
+11:45 AM PST: The payment processing service was restarted, temporarily resolving the issue.
+12:00 PM PST: The payment processing service provider deployed a patched version of their software addressing the memory leak.
+Root Cause and Resolution
+
+The root cause of the issue was a memory leak within the payment processing service software. This leak caused the server's memory usage to gradually increase over time, eventually leading to unresponsive behavior under heavy load. Restarting the service offered temporary relief as it cleared the accumulated memory usage. However, the permanent resolution involved deploying a patched version of the software provided by the payment processor, which addressed the underlying memory leak issue.
+
+Corrective and Preventative Measures
+
+Improved Monitoring: Implement more granular monitoring for the payment processing service, including real-time memory usage metrics. Additionally, configure alerts for abnormal memory usage patterns.
+Automated Testing: Integrate automated load testing within our development pipeline to simulate peak traffic scenarios and identify potential bottlenecks or resource limitations.
+Vendor Communication: Establish clearer communication channels with the payment processing service provider to ensure faster response times during future incidents.
+Code Review: Conduct a code review of our integration with the payment processing service to identify potential optimizations or error handling mechanisms.
